@@ -1,27 +1,25 @@
 $(document).ready(function(){
-  $("#photo-form").submit(function(event){
-      event.preventDefault()
-
-      let link = $("#linkInput").val()
-      let caption = $("#capInput").val()
-      photoPoster(link, caption)
-      this.reset()
-  })
+    formListener()
 })
 
-function photoPoster(link, caption){
 
-    let img = `<img src="${link}">`
-    let comment = `<p>${caption}</p>`
 
-    var list = $("#photo-list")
+function formListener(){
+    $("#photo-form").submit(function(event){
+        event.preventDefault()
 
-    list.append(img)
-    list.append(comment)
+        let link = $("#linkInput").val()
+        let caption = $("#capInput").val()
+        photoPoster(link, caption)
+        this.reset()
+    })
 }
 
+function photoPoster(link, caption){
+    let img = new Image(link)
+    let comment = new Comment(caption)
+    let list = $("#photo-list")
 
-// function clearForm(){
-//     debugger
-//     this.reset()
-// }
+    list.append(img.render())
+    list.append(comment.render())
+}
